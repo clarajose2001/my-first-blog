@@ -6,7 +6,7 @@
             <time class="date">
                 {{ post.published_date }}
             </time>
-            <a href="{% url 'post_detail' pk=post.pk %}">Read more</a>
+            <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
             <p>{{ post.text|linebreaksbr }}</p>
         </article>
     {% endfor %}
