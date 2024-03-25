@@ -12,4 +12,9 @@ urlpatterns = [
     path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+    path('post/<int:pk>/review/', views.add_review, name='add_review'),
+    path('review/<int:pk>/approve/', views.review_approve, name='review_approve'),
+    path('review/<int:pk>/remove/', views.review_remove, name='review_remove'),
+   
+
 ]

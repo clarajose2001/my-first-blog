@@ -1,8 +1,8 @@
 
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, Comment, Review
+from .forms import PostForm, CommentForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -88,3 +88,32 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+
+def add_review(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.post = post
+            review.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = ReviewForm()
+    return render(request, 'blog/add_review.html', {'form': form})
+
+@login_required
+def review_approve(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    review.approve()
+    return redirect('post_detail', pk=review.post.pk)
+
+@login_required
+def review_remove(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    review.delete()
+    return redirect('post_detail', pk=review.post.pk)
+
+
+

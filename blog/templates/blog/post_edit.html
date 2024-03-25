@@ -1,9 +1,45 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-secondary">Save</button>
-    </form>
+<style>
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .post-form {
+        max-width: 500px;
+        margin-top: 20px;
+    }
+
+    .post-form input[type="text"],
+    .post-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .post-form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .post-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<h2>New post</h2>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-secondary">Save</button>
+</form>
 {% endblock %}
